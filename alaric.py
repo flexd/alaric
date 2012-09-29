@@ -75,6 +75,14 @@ class Alaric:
                                         else:
                                             print "Comment has been successfully posted."
 
+                                            ##] Post a new thread to the logger reddit if specified
+                                            if logger_subreddit is not None:
+                                                try:
+                                                    self.user.submit(logger_subreddit, submission_title, submission_text)
+                                                except APIException:
+                                                    pass
+                                                else:
+                                                    print "Logged report to {subreddit}".format(subreddit=logger_subreddit)
 
 
         else:
