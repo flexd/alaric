@@ -68,12 +68,12 @@ class Alaric:
                                     else:
                                         print "Post has been successfully removed."
 
-                                    try:
-                                        post.add_comment(self.banned_url_comment_reply + self.robot_comment_footer)
-                                    except APIException:
-                                        pass
-                                    else:
-                                        print "Comment has been successfully posted."
+                                        try:
+                                            post.add_comment(self.banned_url_comment_reply + self.robot_comment_footer)
+                                        except APIException:
+                                            pass
+                                        else:
+                                            print "Comment has been successfully posted."
 
 
 
