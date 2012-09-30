@@ -2,7 +2,7 @@
 from alaric import Alaric
 
 ##] Some configurating
-banned_urls = ['qkme.me', 'quickmeme.com']
+banned_urls = ['qkme.me', 'quickmeme.com', 'memegenerator.net']
 subreddits = ['wow']
 logger_subreddit = "wowcaretaker"
 
