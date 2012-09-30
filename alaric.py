@@ -76,7 +76,7 @@ class Alaric:
                                             print "Comment has been successfully posted."
 
                                             ##] Post a new thread to the logger reddit if specified
-                                            if logger_subreddit is not None:
+                                            if self.logger_subreddit is not None:
 
                                                 submission_author = post.author
                                                 submission_url = post.url
@@ -84,11 +84,11 @@ class Alaric:
                                                 submission_title = "Removed post with url [{banned_url}] submitted by /u/{submission_author}".format(banned_url=banned_url,submission_author=submission_author)
                                                 submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}"
                                                 try:
-                                                    self.user.submit(logger_subreddit, submission_title, submission_text)
+                                                    self.user.submit(self.logger_subreddit, submission_title, submission_text)
                                                 except APIException:
                                                     pass
                                                 else:
-                                                    print "Logged report to {subreddit}".format(subreddit=logger_subreddit)
+                                                    print "Logged report to {subreddit}".format(subreddit=self.logger_subreddit)
 
 
         else:
