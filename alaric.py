@@ -81,8 +81,8 @@ class Alaric:
                                                 submission_author = post.author
                                                 submission_url = post.url
       
-                                                submission_title = "Removed post with url [{banned_url}] submitted by /u/{submission_author}".format(banned_url=banned_url,submission_author=submission_author)
-                                                submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}"
+                                                submission_title = "Removed post with url [{banned_url}] submitted by /u/{submission_author}".format(banned_url=banned_url, submission_author=submission_author)
+                                                submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}".format(submission_url=submission_url, submission_author=submission_author)
                                                 try:
                                                     self.user.submit(self.logger_subreddit, submission_title, submission_text)
                                                 except APIException:
