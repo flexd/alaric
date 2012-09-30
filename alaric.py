@@ -12,7 +12,7 @@ class Alaric:
 
         ##] Robot commenting is awesome
         self.robot_comment_footer = "\n\n----\nThis comment was posted by a robot. If you believe this was in error, please contact its creator [here](http://www.reddit.com/message/compose/?to=fluxflashor)"
-        self.banned_url_comment_reply = "Greetings,\n\nI have removed your post as it violates our subreddit policy towards memes.\n\n> No GM Jokes, memes, rage comics/faces.\n\nI suggest you try your submission over in /r/wowcomics instead. Have a great day =)"
+        self.banned_url_comment_reply = "Greetings {author_name},\n\nI have removed your post as it violates our subreddit policy towards memes.\n\n> No GM Jokes, memes, rage comics/faces.\n\nI suggest you try your submission over in /r/wowcomics instead. Have a great day =)"
 
         self.user = Reddit(user_agent=self.user_agent)
         self.user.login()
@@ -69,7 +69,7 @@ class Alaric:
                                         print "Post has been successfully removed."
 
                                         try:
-                                            post.add_comment(self.banned_url_comment_reply + self.robot_comment_footer)
+                                            post.add_comment(self.banned_url_comment_reply.format(author_name=post.author) + self.robot_comment_footer)
                                         except APIException:
                                             pass
                                         else:
@@ -77,6 +77,12 @@ class Alaric:
 
                                             ##] Post a new thread to the logger reddit if specified
                                             if logger_subreddit is not None:
+
+                                                submission_author = post.author
+                                                submission_url = post.url
+      
+                                                submission_title = "Removed post with url [{banned_url}] submitted by /u/{submission_author}".format(banned_url=banned_url,submission_author=submission_author)
+                                                submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}"
                                                 try:
                                                     self.user.submit(logger_subreddit, submission_title, submission_text)
                                                 except APIException:
