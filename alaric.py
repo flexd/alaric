@@ -10,7 +10,7 @@ class Alaric:
         self.logger_subreddit = self.set_defaults(logger_subreddit, None)
 
         ##] Default robot stuff
-        self.robot_comment_footer = "\n\n----\nThis comment was posted by a robot."
+        self.comment_footer = "\n\n----\nThis comment was posted by a robot."
         #self.url_comment_reply = "Greetings {author_name},\n\nI have removed your post as it violates our subreddit policy towards memes.\n\n> No GM Jokes, memes, rage comics/faces.\n\nI suggest you try your submission over in /r/wowcomics instead. Have a great day =)"
 
         self.user = Reddit(user_agent=self.user_agent)
@@ -26,13 +26,13 @@ class Alaric:
         return defaults
 
 
-    def set_robot_comment_footer(self, markdown):
+    def set_comment_footer(self, markdown):
         """ Accepts a plaintext string or string of
             markdown text. Currently there is no
             checks in place to make sure the user
             submits text that will work with reddit.
             """
-        self.robot_comment_footer = markdown
+        self.comment_footer = markdown
 
 
     def remove_posts_with_url(self, urls=None, reason=None):
@@ -91,7 +91,7 @@ class Alaric:
 
                                         try:
                                             if reason is not None:
-                                                post.add_comment(reason.format(author_name=post.author) + self.robot_comment_footer)
+                                                post.add_comment(reason.format(author_name=post.author) + self.comment_footer)
                                         except APIException:
                                             pass
                                         else:
