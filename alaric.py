@@ -49,10 +49,10 @@ class Alaric:
             If a boolean is not passed to the function,
             it will default to True.
             """
-            if type(output_enabled) in (bool):
-                self.console_output = output_enabled
-            else:
-                self.console_output = True
+        if type(output_enabled) in (bool):
+            self.console_output = output_enabled
+        else:
+            self.console_output = True
 
 
     def output_to_console(self, message):
