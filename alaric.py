@@ -41,7 +41,7 @@ class Alaric:
         fhandler.close()
 
 
-    def console_output(self, output_enabled=True):
+    def set_console_output(self, output_enabled=True):
         """ Accepts boolean parameter that allows
             a user to enable console output from
             Alaric if the bot is being run in a console.
