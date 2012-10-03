@@ -11,8 +11,7 @@ class Alaric:
 
         ##] Default robot stuff
         self.comment_footer = "\n\n----\nThis comment was posted by a robot."
-        #self.url_comment_reply = "Greetings {author_name},\n\nI have removed your post as it violates our subreddit policy towards memes.\n\n> No GM Jokes, memes, rage comics/faces.\n\nI suggest you try your submission over in /r/wowcomics instead. Have a great day =)"
-
+        
         self.user = Reddit(user_agent=self.user_agent)
         self.user.login()
 
