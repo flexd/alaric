@@ -55,6 +55,15 @@ class Alaric:
                 self.console_output = True
 
 
+    def output_to_console(self, message):
+        """ Outputs a message to the console if the
+            user has told Alaric it is allowed to do
+            so.
+            """
+        if self.console_output:
+            print message
+
+
     def remove_posts_with_url(self, urls=None, reason=None):
         """ Grabs the 100 latest posts from the specified 
             subreddits and checks to see if they match any
