@@ -83,16 +83,16 @@ class Alaric:
                                     
                                     try:
                                         post.remove()
-                                    except errors.APIException:
-                                        pass
+                                    except errors.APIException as e:
+                                        print e
                                     else:
                                         print "Post has been successfully removed."
 
                                         try:
                                             if reason is not None:
                                                 post.add_comment(reason.format(author_name=post.author) + self.comment_footer)
-                                        except errors.APIException:
-                                            pass
+                                        except errors.APIException as e:
+                                            print e
                                         else:
                                             print "Comment has been successfully posted."
 
@@ -106,8 +106,8 @@ class Alaric:
                                                 submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}".format(submission_url=submission_url, submission_author=submission_author)
                                                 try:
                                                     self.user.submit(self.logger_subreddit, submission_title, submission_text)
-                                                except errors.APIException:
-                                                    pass
+                                                except errors.APIException as e:
+                                                    print e
                                                 else:
                                                     print "Logged report to {subreddit}".format(subreddit=self.logger_subreddit)
 
