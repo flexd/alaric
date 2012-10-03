@@ -9,8 +9,8 @@ class Alaric:
         self.subreddits = self.set_defaults(subreddits, list())
         self.logger_subreddit = self.set_defaults(logger_subreddit, None)
 
-        ##] Robot commenting is awesome
-        self.robot_comment_footer = "\n\n----\nThis comment was posted by a robot. If you believe this was in error, please contact its creator [here](http://www.reddit.com/message/compose/?to=fluxflashor)"
+        ##] Default robot stuff
+        self.robot_comment_footer = "\n\n----\nThis comment was posted by a robot."
         #self.url_comment_reply = "Greetings {author_name},\n\nI have removed your post as it violates our subreddit policy towards memes.\n\n> No GM Jokes, memes, rage comics/faces.\n\nI suggest you try your submission over in /r/wowcomics instead. Have a great day =)"
 
         self.user = Reddit(user_agent=self.user_agent)
@@ -24,6 +24,16 @@ class Alaric:
             defaults = default_value
 
         return defaults
+
+
+    def set_robot_comment_footer(self, markdown):
+        """ Accepts a plaintext string or string of
+            markdown text. Currently there is no
+            checks in place to make sure the user
+            submits text that will work with reddit.
+            """
+        self.robot_comment_footer = markdown
+
 
     def remove_posts_with_url(self, urls=None, reason=None):
         """ Grabs the 100 latest posts from the specified 
