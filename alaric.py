@@ -83,7 +83,7 @@ class Alaric:
         if urls is not None:
             
             if len(self.subreddits) < 1:
-                print "No subreddits provided."
+                output_to_console("No subreddits provided.")
             else: 
                 for subreddit in self.subreddits:
 
@@ -101,22 +101,21 @@ class Alaric:
 
                     for post in new_posts:
                         post_id += 1
-                        #print post
                         for url in urls:
                             if url in post.url:
-                                print "URL Match Found.\n  " + post.url
+                                output_to_console("URL Match Found.\n  " + post.url)
 
                                 if post.name in already_posted:
-                                    print "Ignoring. Already replied and removed."
+                                    output_to_console("Ignoring. Already replied and removed.")
                                 else:
-                                    print "Post has not been removed or replied to"
+                                    output_to_console("Post has not been removed or replied to")
                                     
                                     try:
                                         post.remove()
                                     except errors.APIException as e:
                                         write_to_file('error.log', e)
                                     else:
-                                        print "Post has been successfully removed."
+                                        output_to_console("Post has been successfully removed.")
 
                                         try:
                                             if reason is not None:
@@ -124,7 +123,7 @@ class Alaric:
                                         except errors.APIException as e:
                                             write_to_file('error.log', e)
                                         else:
-                                            print "Comment has been successfully posted."
+                                            output_to_console("Comment has been successfully posted.")
 
                                             ##] Post a new thread to the logger reddit if specified
                                             if self.logger_subreddit is not None:
@@ -139,8 +138,8 @@ class Alaric:
                                                 except errors.APIException as e:
                                                     write_to_file('error.log', e)
                                                 else:
-                                                    print "Logged report to {subreddit}".format(subreddit=self.logger_subreddit)
+                                                    output_to_console("Logged report to {subreddit}".format(subreddit=self.logger_subreddit))
 
 
         else:
-            print "No urls provided."
+            output_to_console("No urls provided.")
