@@ -2,7 +2,7 @@
 from alaric import Alaric
 
 ##] Some configurating
-subreddits = ['wow']
+subreddits = ['wow', 'fluxflashor']
 logger_subreddit = "wowcaretaker"
 
 bad_urls = {
