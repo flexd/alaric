@@ -33,6 +33,11 @@ class Alaric:
             """
         self.comment_footer = markdown
 
+    def write_to_file(self, file_path, text):
+        fhandler = open(file_path, 'a+')
+        fhandler.write(text)
+        fhandler.close()
+
 
     def remove_posts_with_url(self, urls=None, reason=None):
         """ Grabs the 100 latest posts from the specified 
@@ -84,7 +89,7 @@ class Alaric:
                                     try:
                                         post.remove()
                                     except errors.APIException as e:
-                                        print e
+                                        write_to_file('error.log', e)
                                     else:
                                         print "Post has been successfully removed."
 
@@ -92,7 +97,7 @@ class Alaric:
                                             if reason is not None:
                                                 post.add_comment(reason.format(author_name=post.author) + self.comment_footer)
                                         except errors.APIException as e:
-                                            print e
+                                            write_to_file('error.log', e)
                                         else:
                                             print "Comment has been successfully posted."
 
@@ -107,7 +112,7 @@ class Alaric:
                                                 try:
                                                     self.user.submit(self.logger_subreddit, submission_title, submission_text)
                                                 except errors.APIException as e:
-                                                    print e
+                                                    write_to_file('error.log', e)
                                                 else:
                                                     print "Logged report to {subreddit}".format(subreddit=self.logger_subreddit)
 
