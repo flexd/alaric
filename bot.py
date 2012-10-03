@@ -28,4 +28,4 @@ wowbot.set_comment_footer("\n\n----\nThis comment was posted by a robot. If you 
 
 ##] Remove bad urls
 for _, url in bad_urls.iteritems():
-    wowbot.remote_posts_with_url(url['sites'], url['reason'])
+    wowbot.remove_posts_with_url(url['sites'], url['reason'])
