@@ -1,5 +1,5 @@
 from time import gmtime, strftime
-from praw import Reddit
+from praw import Reddit, errors
 
 class Alaric:
 
@@ -11,7 +11,7 @@ class Alaric:
 
         ##] Default robot stuff
         self.comment_footer = "\n\n----\nThis comment was posted by a robot."
-        
+
         self.user = Reddit(user_agent=self.user_agent)
         self.user.login()
 
@@ -83,7 +83,7 @@ class Alaric:
                                     
                                     try:
                                         post.remove()
-                                    except APIException:
+                                    except errors.APIException:
                                         pass
                                     else:
                                         print "Post has been successfully removed."
@@ -91,7 +91,7 @@ class Alaric:
                                         try:
                                             if reason is not None:
                                                 post.add_comment(reason.format(author_name=post.author) + self.comment_footer)
-                                        except APIException:
+                                        except errors.APIException:
                                             pass
                                         else:
                                             print "Comment has been successfully posted."
@@ -106,7 +106,7 @@ class Alaric:
                                                 submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}".format(submission_url=submission_url, submission_author=submission_author)
                                                 try:
                                                     self.user.submit(self.logger_subreddit, submission_title, submission_text)
-                                                except APIException:
+                                                except errors.APIException:
                                                     pass
                                                 else:
                                                     print "Logged report to {subreddit}".format(subreddit=self.logger_subreddit)
@@ -114,73 +114,3 @@ class Alaric:
 
         else:
             print "No urls provided."
-
-
-    ##] Legacy
-    def remove_banned_urls(self, banned_urls=None):
-        """ Grabs the 100 latest posts from the specified 
-            subreddits and checks to see if the banned urls 
-            matches any of them"""
-        if banned_urls is not None:
-            
-            if len(self.subreddits) < 1:
-                print "No subreddits provided."
-            else:    
-                for subreddit in self.subreddits:
-
-                    sr = self.user.get_subreddit(subreddit)
-                    post_id = 0
-                    new_posts = sr.get_new(limit=100)
-
-                    try:
-                        posts_file = open(subreddit+".posts", 'r')
-                    except IOError:
-                        already_posted = ""
-                    else: 
-                        already_posted = posts_file.read()
-                        posts_file.close()
-
-                    for post in new_posts:
-                        post_id += 1
-                        #print post
-                        for banned_url in banned_urls:
-                            if banned_url in post.url:
-                                print "Banned URL found.\n  " + post.url
-
-                                if post.name in already_posted:
-                                    print "Ignoring. Already replied and removed."
-                                else:
-                                    print "Post has not been removed or replied to"
-                                    
-                                    try:
-                                        post.remove()
-                                    except APIException:
-                                        pass
-                                    else:
-                                        print "Post has been successfully removed."
-
-                                        try:
-                                            post.add_comment(self.banned_url_comment_reply.format(author_name=post.author) + self.robot_comment_footer)
-                                        except APIException:
-                                            pass
-                                        else:
-                                            print "Comment has been successfully posted."
-
-                                            ##] Post a new thread to the logger reddit if specified
-                                            if self.logger_subreddit is not None:
-
-                                                submission_author = post.author
-                                                submission_url = post.url
-      
-                                                submission_title = "Removed post with url [{banned_url}] submitted by /u/{submission_author}".format(banned_url=banned_url, submission_author=submission_author)
-                                                submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}".format(submission_url=submission_url, submission_author=submission_author)
-                                                try:
-                                                    self.user.submit(self.logger_subreddit, submission_title, submission_text)
-                                                except APIException:
-                                                    pass
-                                                else:
-                                                    print "Logged report to {subreddit}".format(subreddit=self.logger_subreddit)
-
-
-        else:
-            print "No banned urls provided."
