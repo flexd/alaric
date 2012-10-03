@@ -35,7 +35,7 @@ class Alaric:
         self.comment_footer = markdown
 
 
-    def write_to_file(self, file_path, text):
+    def _write_to_file(self, file_path, text):
         fhandler = open(file_path, 'a+')
         fhandler.write(text)
         fhandler.close()
@@ -55,7 +55,7 @@ class Alaric:
             self.console_output = True
 
 
-    def output_to_console(self, message):
+    def _output_to_console(self, message):
         """ Outputs a message to the console if the
             user has told Alaric it is allowed to do
             so.
@@ -83,7 +83,7 @@ class Alaric:
         if urls is not None:
             
             if len(self.subreddits) < 1:
-                output_to_console("No subreddits provided.")
+                self._output_to_console("No subreddits provided.")
             else: 
                 for subreddit in self.subreddits:
 
@@ -103,27 +103,27 @@ class Alaric:
                         post_id += 1
                         for url in urls:
                             if url in post.url:
-                                output_to_console("URL Match Found.\n  " + post.url)
+                                self._output_to_console("URL Match Found.\n  " + post.url)
 
                                 if post.name in already_posted:
-                                    output_to_console("Ignoring. Already replied and removed.")
+                                    self._output_to_console("Ignoring. Already replied and removed.")
                                 else:
-                                    output_to_console("Post has not been removed or replied to")
+                                    self._output_to_console("Post has not been removed or replied to")
                                     
                                     try:
                                         post.remove()
                                     except errors.APIException as e:
-                                        write_to_file('error.log', e)
+                                        self._write_to_file('error.log', e)
                                     else:
-                                        output_to_console("Post has been successfully removed.")
+                                        self._output_to_console("Post has been successfully removed.")
 
                                         try:
                                             if reason is not None:
                                                 post.add_comment(reason.format(author_name=post.author) + self.comment_footer)
                                         except errors.APIException as e:
-                                            write_to_file('error.log', e)
+                                            self._write_to_file('error.log', e)
                                         else:
-                                            output_to_console("Comment has been successfully posted.")
+                                            self._output_to_console("Comment has been successfully posted.")
 
                                             ##] Post a new thread to the logger reddit if specified
                                             if self.logger_subreddit is not None:
@@ -137,10 +137,10 @@ class Alaric:
                                                 try:
                                                     self.user.submit(self.logger_subreddit, submission_title, submission_text)
                                                 except errors.APIException as e:
-                                                    write_to_file('error.log', e)
+                                                    self._write_to_file('error.log', e)
                                                 else:
-                                                    output_to_console("Logged report to {subreddit}".format(subreddit=self.logger_subreddit))
+                                                    self._output_to_console("Logged report to {subreddit}".format(subreddit=self.logger_subreddit))
 
 
         else:
-            output_to_console("No urls provided.")
+            self._output_to_console("No urls provided.")
