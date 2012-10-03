@@ -11,6 +11,7 @@ class Alaric:
 
         ##] Default robot stuff
         self.comment_footer = "\n\n----\nThis comment was posted by a robot."
+        self.console_output = False
 
         self.user = Reddit(user_agent=self.user_agent)
         self.user.login()
@@ -33,10 +34,25 @@ class Alaric:
             """
         self.comment_footer = markdown
 
+
     def write_to_file(self, file_path, text):
         fhandler = open(file_path, 'a+')
         fhandler.write(text)
         fhandler.close()
+
+
+    def console_output(self, output_enabled=True):
+        """ Accepts boolean parameter that allows
+            a user to enable console output from
+            Alaric if the bot is being run in a console.
+            
+            If a boolean is not passed to the function,
+            it will default to True.
+            """
+            if type(output_enabled) in (bool):
+                self.console_output = output_enabled
+            else:
+                self.console_output = True
 
 
     def remove_posts_with_url(self, urls=None, reason=None):
