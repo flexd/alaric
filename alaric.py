@@ -130,9 +130,10 @@ class Alaric:
 
                                                 submission_author = post.author
                                                 submission_url = post.url
+                                                selfpost_url = post.permalink
       
                                                 submission_title = "Removed post with url [{url}] submitted by /u/{submission_author}".format(url=url, submission_author=submission_author)
-                                                submission_text = "**REPORT**  \n\nSubmission URL: {submission_url}  \nSubmitted by: {submission_author}".format(submission_url=submission_url, submission_author=submission_author)
+                                                submission_text = "**ALARIC REMOVAL REPORT**  \n\nSubmission Author: {submission_author}  \nURL that was Submitted: {submission_url}  \nLink to redditpost: {selfpost_url}".format(submission_url=submission_url, submission_author=submission_author, selfpost_url=selfpost_url)
                                                 try:
                                                     self.user.submit(self.logger_subreddit, submission_title, submission_text)
                                                 except errors.APIException as e:
