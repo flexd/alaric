@@ -18,6 +18,10 @@ bad_urls = {
         'sites': ['trinitycore.info', 'arcemu.org', 'ac-web.org', 'getmangos.com', 'mmotop.org'],
         'reason': "Greetings {author_name},\n\nI have removed your post as it violates our subreddit policy towards WoW Emulation. This community does not endorse private servers and has no plans to. Why don't you try posting in /r/wowservers instead. Have a great day =)"
     },
+    'dickheads': {
+        'sites': ['gameguyz'],
+        'reason': "Greetings {author_name},\n\nI have removed your post because the URL has been flagged as a spam url. This is not an error, don't bother asking us to remove it. Have a great day =)"
+    }
 }
 
 ##] Startup a new instance of Alaric
