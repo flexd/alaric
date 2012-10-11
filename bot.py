@@ -21,7 +21,7 @@ bad_urls = {
     'dickheads': {
         'sites': ['gameguyz'],
         'reason': "Greetings {author_name},\n\nI have removed your post because the URL has been flagged as a spam url. This is not an error, don't bother asking us to remove it. Have a great day =)"
-    }
+    },
     'gawker': {
         'sites': ['gawker.com', 'gizmodo.com', 'kotaku.com', 'jalopnik.com', 'lifehacker.com', 'deadspin.com', 'io9.com', 'jezebel.com', 'gaw.kr'],
         'reason': "Greetings {author_name},\n\nI have removed your post as it violates a subreddit media ban on Gawker. For more information please visit [this awesome thread](http://www.reddit.com/r/wow/comments/11also/rwow_announcement_kotaku_may_no_longer_be/). Repeated Gawker submissions will result in a ban."
