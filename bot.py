@@ -25,6 +25,10 @@ bad_urls = {
     'gawker': {
         'sites': ['gawker.com', 'gizmodo.com', 'kotaku.com', 'jalopnik.com', 'lifehacker.com', 'deadspin.com', 'io9.com', 'jezebel.com', 'gaw.kr'],
         'reason': "Greetings {author_name},\n\nI have removed your post as it violates a subreddit media ban on Gawker. For more information please visit [this awesome thread](http://www.reddit.com/r/wow/comments/11also/rwow_announcement_kotaku_may_no_longer_be/). Repeated Gawker submissions will result in a ban."
+    },
+    'goldmaking': {
+        'sites': ['phatlewtsgold'],
+        'reason': "Greetings {author_name},\n\nYour post has been removed because posts of this nature belong in /r/wowgoldmaking. Feel free to [make a submission](http://reddit.com/r/wowgoldmaking/submit) over there."
     }
 }
 
